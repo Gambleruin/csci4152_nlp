@@ -39,39 +39,24 @@ my %counts =map{
 		($input => scalar grep {$_ eq $input} @words):
 		()
 	} @words;
-
-my $cnt =0;
-# reverse sort (highest first) the hash values and print (give the top 10 frequent words)
-my @fir_ten;
-foreach(reverse sort {$counts{$a} <=> $counts{$b}} keys %counts) {
-    push @fir_ten, $_;
-    # print "$_: $counts{$_}\n";
-    $cnt =$cnt+1;
-    if($cnt >9){
-    	last;}
+	
+# print $counts{"i"}, "\n";
+sub return_freq{
+	my ($key, %counts) =@_;
+	print $key. "\n";
+	my $lc_key =lc($key);
+	if (exists $counts{$lc_key}){
+		print $counts{$lc_key}. "\n";
+	}
+	else {
+		print "0\n";
+	}
 }
-print join(',', @fir_ten), "\n";
-my $count_hapax_lego=0;
-foreach (keys %counts){
-	if ($counts{$_} ==1){
-		$count_hapax_lego =$count_hapax_lego+1;
-		# print "the word with count 1 is: $_\n";
-		}
-
-}
-print "the number of hapax legomena is:", $count_hapax_lego;
-#another way to do this - using the modifier /g for regex match
-#while (<>) {
-#    foreach my $let (/[a-zA-Z]/g) {              
-#         $f{lc $let} += 1;                                     
-#         $tot ++;                                  
-#     }
-#}
 
 
-#for (sort { $f{________} ________ $f{_________} } keys %f) {
-#	print sprintf("%6d %.4lf %s\n",$f{$_}, $f{$_}/$tot, $_);
-#}
-#close $fh;
+# foreach (keys %counts){
+#	print $counts{$_};
+&return_freq("I", %counts)
+
 
 
